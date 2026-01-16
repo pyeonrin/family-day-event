@@ -29,10 +29,24 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            overflow-y: auto;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
+            gap: 0;
+        }
+
+        /* 전체 배너 래퍼 */
+        .full-banner-wrapper {
+            transform: scale(0.6);
+            transform-origin: center top;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
         }
 
         /* 모바일 배너 컨테이너 */
@@ -44,9 +58,9 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
-            overflow: visible;
-            transform: scale(0.6);
-            transform-origin: center center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         /* 매화 오버레이 레이어 */
@@ -68,7 +82,7 @@
         /* 배너 내부 컨텐츠 래퍼 */
         .banner-content {
             width: 100%;
-            min-height: 100vh;
+            height: auto;
             padding: 6rem 2rem 4rem;
             display: flex;
             flex-direction: column;
@@ -94,21 +108,22 @@
             height: 24px;
             background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 50%, #FFE8E8 100%);
             border-radius: 80% 0 80% 0;
-            opacity: 0.9;
+            opacity: 0;
             animation: fall linear infinite;
             border: 1px solid rgba(255, 182, 193, 0.4);
             transform-origin: center;
+            top: -200px;
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-100px) translateX(0) rotate(0deg);
+                transform: translateY(-150px) translateX(0) rotate(0deg);
                 opacity: 0;
             }
-            5% {
+            10% {
                 opacity: 0;
             }
-            15% {
+            20% {
                 opacity: 0.9;
             }
             25% {
@@ -264,6 +279,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .logo-image {
@@ -273,17 +289,28 @@
             filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
         }
 
+        .bird-decoration {
+            position: absolute;
+            top: -45px;
+            left: 5%;
+            width: 150px;
+            height: auto;
+            z-index: 10;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
         .event-period {
             font-size: 3rem;
             color: #444;
             font-weight: 400;
             margin-top: 2rem;
+            margin-bottom: 5rem;
             text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
         }
 
         /* Benefits 섹션 */
         .benefits-section {
-            padding: 2rem 1.5rem 3rem;
+            padding: 5rem 1.5rem 7.5rem;
             position: relative;
             z-index: 2;
             display: flex;
@@ -334,7 +361,7 @@
         .card-content-box {
             background: #FFFFFF;
             border-radius: 1rem;
-            padding: 3rem 2rem 2.5rem;
+            padding: 1rem 2rem 1rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             width: 100%;
             margin-top: -1.5rem;
@@ -344,7 +371,7 @@
             flex-direction: column;
             align-items: center;
             transition: all 0.3s ease;
-            min-height: 32rem;
+            min-height: 20rem;
         }
 
         .benefit-card:hover .card-content-box {
@@ -383,6 +410,22 @@
             color: #666;
             font-weight: 500;
             margin: 0;
+        }
+
+        /* 추가 배너 섹션 */
+        .additional-banner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .additional-banner-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
         }
 
         /* 반응형 */
@@ -433,8 +476,10 @@
     </style>
 </head>
 <body>
-    <!-- 모바일 배너 컨테이너 -->
-    <div class="mobile-banner-container">
+    <!-- 전체 배너 래퍼 -->
+    <div class="full-banner-wrapper">
+        <!-- 모바일 배너 컨테이너 -->
+        <div class="mobile-banner-container">
         <div class="banner-content">
             <!-- 흩날리는 꽃잎 -->
             <div class="falling-petals">
@@ -629,6 +674,7 @@
                 </div>
                 <div class="event-subtitle">웅진마켓 패밀리데이</div>
                 <div class="event-logo">
+                    <img src="bird.png" alt="새" class="bird-decoration">
                     <img src="family-day-logo.png" alt="FAMILY DAY" class="logo-image">
                 </div>
                 <p class="event-period">26. 02. 03 ── 02. 05</p>
@@ -657,6 +703,7 @@
                                 <img src="cash_icon_nobg.png" alt="구매금액 페이백" style="width: 134px; height: 112px; object-fit: contain;">
                             </div>
                             <p class="card-benefit">10% 페이백</p>
+                            <p class="card-detail" style="visibility: hidden;">(공백)</p>
                         </div>
                     </article>
 
@@ -668,11 +715,18 @@
                                 <img src="card_icon_nobg.png" alt="비씨카드 할인" style="width: 134px; height: 112px; object-fit: contain;">
                             </div>
                             <p class="card-benefit">10% 할인</p>
+                            <p class="card-detail" style="visibility: hidden;">(공백)</p>
                         </div>
                     </article>
                 </div>
             </section>
         </div>
+    </div>
+
+    <!-- 추가 배너 이미지 섹션 -->
+    <div class="additional-banner">
+        <img src="mo_l_family_260203.png" alt="패밀리데이 상세 정보" class="additional-banner-image">
+    </div>
     </div>
 </body>
 </html>
