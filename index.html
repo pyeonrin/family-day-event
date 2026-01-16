@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="2026 웅진마켓 패밀리데이 이벤트 - 2월 3일부터 5일까지 특별 혜택">
+    <title>2026 웅진마켓 패밀리데이</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sky-blue-light: #E8F4F8;
+            --sky-blue: #C5E3F6;
+            --sky-blue-dark: #90CAF9;
+            --coral-pink: #FF9AA2;
+            --coral-red: #FF6B7A;
+            --gold: #FFD700;
+            --gold-light: #FFE55C;
+            --cream: #FFF9F0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 모바일 배너 컨테이너 */
+        .mobile-banner-container {
+            width: 100%;
+            max-width: 1200px;
+            background-image: url('background-sky.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: visible;
+            transform: scale(0.6);
+            transform-origin: center center;
+        }
+
+        /* 매화 오버레이 레이어 */
+        .mobile-banner-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('plum-overlay.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 배너 내부 컨텐츠 래퍼 */
+        .banner-content {
+            width: 100%;
+            min-height: 100vh;
+            padding: 6rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            justify-content: space-between;
+        }
+
+        /* 흩날리는 꽃잎 컨테이너 */
+        .falling-petals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 50%, #FFE8E8 100%);
+            border-radius: 80% 0 80% 0;
+            opacity: 0.9;
+            animation: fall linear infinite;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            transform-origin: center;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            25% {
+                transform: translateY(25vh) translateX(15px) rotate(90deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) translateX(-10px) rotate(180deg);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateY(75vh) translateX(20px) rotate(270deg);
+                opacity: 0.6;
+            }
+            95% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(110vh) translateX(-15px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 각 꽃잎마다 다른 애니메이션 */
+        .petal:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .petal:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 2s; width: 20px; height: 20px; }
+        .petal:nth-child(3) { left: 30%; animation-duration: 13s; animation-delay: 4s; }
+        .petal:nth-child(4) { left: 40%; animation-duration: 16s; animation-delay: 1s; width: 28px; height: 28px; }
+        .petal:nth-child(5) { left: 50%; animation-duration: 14s; animation-delay: 3s; }
+        .petal:nth-child(6) { left: 60%; animation-duration: 17s; animation-delay: 5s; width: 22px; height: 22px; }
+        .petal:nth-child(7) { left: 70%; animation-duration: 15s; animation-delay: 2.5s; }
+        .petal:nth-child(8) { left: 80%; animation-duration: 13s; animation-delay: 4.5s; width: 26px; height: 26px; }
+        .petal:nth-child(9) { left: 90%; animation-duration: 14s; animation-delay: 1.5s; }
+        .petal:nth-child(10) { left: 15%; animation-duration: 16s; animation-delay: 3.5s; width: 23px; height: 23px; }
+        .petal:nth-child(11) { left: 25%; animation-duration: 15s; animation-delay: 0.5s; }
+        .petal:nth-child(12) { left: 35%; animation-duration: 14s; animation-delay: 2.8s; width: 27px; height: 27px; }
+        .petal:nth-child(13) { left: 45%; animation-duration: 13s; animation-delay: 4.2s; }
+        .petal:nth-child(14) { left: 55%; animation-duration: 16s; animation-delay: 1.8s; width: 25px; height: 25px; }
+        .petal:nth-child(15) { left: 65%; animation-duration: 15s; animation-delay: 3.2s; }
+        .petal:nth-child(16) { left: 75%; animation-duration: 14s; animation-delay: 5.5s; width: 21px; height: 21px; }
+        .petal:nth-child(17) { left: 85%; animation-duration: 17s; animation-delay: 2.2s; }
+        .petal:nth-child(18) { left: 95%; animation-duration: 13s; animation-delay: 4.8s; width: 26px; height: 26px; }
+        .petal:nth-child(19) { left: 5%; animation-duration: 15s; animation-delay: 1.2s; }
+        .petal:nth-child(20) { left: 50%; animation-duration: 14s; animation-delay: 6s; width: 23px; height: 23px; }
+
+        /* 연 애니메이션 */
+        .flying-kite {
+            position: absolute;
+            bottom: -400px;
+            left: -50px;
+            width: 360px;
+            height: auto;
+            z-index: 2;
+            animation: kite-fly 25s ease-in-out infinite;
+            opacity: 0.9;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        @keyframes kite-fly {
+            0% {
+                bottom: -400px;
+                left: -50px;
+                transform: rotate(-10deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.95;
+            }
+            50% {
+                bottom: 40%;
+                left: 50%;
+                transform: rotate(5deg);
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                bottom: 110%;
+                left: 95%;
+                transform: rotate(-5deg);
+                opacity: 0;
+            }
+        }
+
+        /* 장식 요소 */
+        .decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: 3;
+            display: none; /* 이미지 오버레이를 사용하므로 SVG 장식 숨김 */
+        }
+
+        .plum-blossom {
+            top: 30px;
+            left: 15px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .bird {
+            top: 80px;
+            left: 50px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .kite-left {
+            top: 50px;
+            right: 20px;
+            width: 45px;
+            height: 60px;
+        }
+
+        .kite-right {
+            top: 90px;
+            right: 70px;
+            width: 40px;
+            height: 55px;
+        }
+
+        /* 헤더 섹션 */
+        .event-header {
+            text-align: center;
+            padding: 2rem 1rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .event-year-image {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .year-image {
+            max-width: 18rem;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.15));
+        }
+
+        .event-subtitle {
+            font-size: 2.6rem;
+            color: #555;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .event-logo {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-image {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
+        }
+
+        .event-period {
+            font-size: 3rem;
+            color: #444;
+            font-weight: 400;
+            margin-top: 2rem;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Benefits 섹션 */
+        .benefits-section {
+            padding: 2rem 1.5rem 3rem;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .benefits-container {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .benefit-card {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.68rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0;
+            padding: 1.2rem 3.6rem;
+            background: #2C2C2C;
+            border-radius: 50px;
+            display: inline-block;
+            white-space: nowrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-content-box {
+            background: #FFFFFF;
+            border-radius: 1rem;
+            padding: 3rem 2rem 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            margin-top: -1.5rem;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            min-height: 32rem;
+        }
+
+        .benefit-card:hover .card-content-box {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            margin: 0 0 1.5rem 0;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .card-icon img {
+            width: 18rem !important;
+            height: 15rem !important;
+            object-fit: contain;
+        }
+
+        .benefit-card:hover .card-icon img {
+            transform: scale(1.08);
+        }
+
+        .card-benefit {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 0.3rem 0;
+            line-height: 1.3;
+        }
+
+        .card-detail {
+            font-size: 1.8rem;
+            color: #666;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .banner-content {
+                padding: 3vh 3vw;
+            }
+
+            .year-image {
+                max-width: 25vw;
+            }
+
+            .logo-image {
+                max-width: 95%;
+            }
+
+            .event-period {
+                font-size: 3.5vw;
+            }
+
+            .event-subtitle {
+                font-size: 3.5vw;
+            }
+
+            .benefits-container {
+                flex-direction: column;
+                gap: 3vh;
+            }
+
+            .card-icon img {
+                width: 35vw !important;
+                height: 20vh !important;
+            }
+
+            .card-title {
+                font-size: 4.5vw;
+                padding: 1.5vh 7vw;
+            }
+
+            .card-benefit {
+                font-size: 4.5vw;
+            }
+
+            .card-detail {
+                font-size: 4vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 모바일 배너 컨테이너 -->
+    <div class="mobile-banner-container">
+        <div class="banner-content">
+            <!-- 흩날리는 꽃잎 -->
+            <div class="falling-petals">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+
+            <!-- 날아오르는 연 -->
+            <img src="kite.png" alt="연" class="flying-kite">
+
+            <!-- 장식 요소 -->
+            <div class="decoration plum-blossom" aria-hidden="true">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 매화꽃 가지 -->
+                    <path d="M 10 100 Q 30 80 50 70 Q 70 60 90 50" stroke="#8B4513" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 50 70 Q 55 65 60 60" stroke="#8B4513" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- 매화꽃 1 -->
+                    <g transform="translate(60, 60)">
+                        <circle cx="0" cy="-8" r="6" fill="#FFB6C1" opacity="0.9"/>
+                        <circle cx="7" cy="-2" r="6" fill="#FFC0CB" opacity="0.9"/>
+                        <circle cx="4" cy="6" r="6" fill="#FFB6C1" opacity="0.9"/>
+                        <circle cx="-4" cy="6" r="6" fill="#FFC0CB" opacity="0.9"/>
+                        <circle cx="-7" cy="-2" r="6" fill="#FFB6C1" opacity="0.9"/>
+                        <circle cx="0" cy="0" r="4" fill="#FFD700"/>
+                        <circle cx="0" cy="0" r="2" fill="#FFA500"/>
+                        <!-- 수술 -->
+                        <line x1="0" y1="0" x2="0" y2="-3" stroke="#FFA500" stroke-width="0.5"/>
+                        <line x1="0" y1="0" x2="2" y2="-2" stroke="#FFA500" stroke-width="0.5"/>
+                        <line x1="0" y1="0" x2="-2" y2="-2" stroke="#FFA500" stroke-width="0.5"/>
+                    </g>
+                    
+                    <!-- 매화꽃 2 (작은 꽃) -->
+                    <g transform="translate(45, 75)">
+                        <circle cx="0" cy="-6" r="4" fill="#FFC0CB" opacity="0.8"/>
+                        <circle cx="5" cy="-1" r="4" fill="#FFB6C1" opacity="0.8"/>
+                        <circle cx="3" cy="4" r="4" fill="#FFC0CB" opacity="0.8"/>
+                        <circle cx="-3" cy="4" r="4" fill="#FFB6C1" opacity="0.8"/>
+                        <circle cx="-5" cy="-1" r="4" fill="#FFC0CB" opacity="0.8"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#FFD700"/>
+                    </g>
+                    
+                    <!-- 꽃봉오리 -->
+                    <ellipse cx="85" cy="55" rx="3" ry="5" fill="#FFB6C1" opacity="0.7"/>
+                    <ellipse cx="87" cy="55" rx="2" ry="4" fill="#FFC0CB" opacity="0.7"/>
+                </svg>
+            </div>
+
+            <div class="decoration bird" aria-hidden="true">
+                <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 제비 몸통 -->
+                    <ellipse cx="60" cy="50" rx="18" ry="12" fill="#2C3E50"/>
+                    <ellipse cx="55" cy="48" rx="8" ry="6" fill="#34495E"/>
+                    
+                    <!-- 머리 -->
+                    <circle cx="45" cy="45" r="8" fill="#2C3E50"/>
+                    <circle cx="42" cy="44" r="2" fill="#FFFFFF"/>
+                    <circle cx="42" cy="44" r="1" fill="#000000"/>
+                    
+                    <!-- 부리 -->
+                    <path d="M 37 45 L 32 44 L 37 43 Z" fill="#FFA500"/>
+                    
+                    <!-- 왼쪽 날개 -->
+                    <path d="M 50 48 Q 25 35 15 40 Q 10 42 15 48 Q 25 52 50 52 Z" fill="#34495E" opacity="0.9"/>
+                    <path d="M 50 48 Q 30 38 20 42 Q 25 45 50 50 Z" fill="#2C3E50" opacity="0.7"/>
+                    
+                    <!-- 오른쪽 날개 -->
+                    <path d="M 65 48 Q 90 35 100 40 Q 105 42 100 48 Q 90 52 65 52 Z" fill="#34495E" opacity="0.9"/>
+                    <path d="M 65 48 Q 85 38 95 42 Q 90 45 65 50 Z" fill="#2C3E50" opacity="0.7"/>
+                    
+                    <!-- 꼬리 (제비 특유의 갈라진 꼬리) -->
+                    <path d="M 75 50 Q 85 48 90 55 L 92 60 Q 88 58 85 52 Z" fill="#2C3E50"/>
+                    <path d="M 75 52 Q 85 54 90 60 L 92 66 Q 88 63 85 56 Z" fill="#2C3E50"/>
+                    
+                    <!-- 가슴의 흰색 부분 -->
+                    <ellipse cx="55" cy="52" rx="6" ry="4" fill="#FFFFFF" opacity="0.6"/>
+                    
+                    <!-- 발 -->
+                    <line x1="58" y1="60" x2="56" y2="68" stroke="#FF6347" stroke-width="1.5"/>
+                    <line x1="62" y1="60" x2="64" y2="68" stroke="#FF6347" stroke-width="1.5"/>
+                    <path d="M 56 68 L 54 69 M 56 68 L 58 69 M 56 68 L 56 70" stroke="#FF6347" stroke-width="1"/>
+                    <path d="M 64 68 L 62 69 M 64 68 L 66 69 M 64 68 L 64 70" stroke="#FF6347" stroke-width="1"/>
+                </svg>
+            </div>
+
+            <div class="decoration kite-left" aria-hidden="true">
+                <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 연 그림자 -->
+                    <polygon points="52,12 82,52 52,92 22,52" fill="#000000" opacity="0.1"/>
+                    
+                    <!-- 연 본체 -->
+                    <polygon points="50,10 80,50 50,90 20,50" fill="#FF6B6B"/>
+                    
+                    <!-- 연의 4개 섹션 (전통 연 패턴) -->
+                    <polygon points="50,10 80,50 50,50" fill="#4ECDC4"/>
+                    <polygon points="50,50 80,50 50,90" fill="#FFE66D"/>
+                    <polygon points="50,50 20,50 50,90" fill="#95E1D3"/>
+                    <polygon points="50,10 20,50 50,50" fill="#F38181"/>
+                    
+                    <!-- 중앙 십자 프레임 -->
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#8B4513" stroke-width="2"/>
+                    <line x1="20" y1="50" x2="80" y2="50" stroke="#8B4513" stroke-width="2"/>
+                    
+                    <!-- 전통 문양 -->
+                    <circle cx="50" cy="30" r="6" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="50" cy="30" r="4" fill="#FFF" opacity="0.4"/>
+                    <circle cx="35" cy="50" r="5" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="65" cy="50" r="5" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="50" cy="70" r="6" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="50" cy="70" r="4" fill="#FFF" opacity="0.4"/>
+                    
+                    <!-- 연 꼬리 -->
+                    <line x1="50" y1="90" x2="50" y2="125" stroke="#FF6B6B" stroke-width="2"/>
+                    
+                    <!-- 꼬리 리본들 -->
+                    <ellipse cx="45" cy="100" rx="8" ry="4" fill="#FFD93D" opacity="0.8"/>
+                    <ellipse cx="55" cy="100" rx="8" ry="4" fill="#4ECDC4" opacity="0.8"/>
+                    <ellipse cx="45" cy="110" rx="8" ry="4" fill="#FF6B6B" opacity="0.8"/>
+                    <ellipse cx="55" cy="110" rx="8" ry="4" fill="#95E1D3" opacity="0.8"/>
+                    <ellipse cx="45" cy="120" rx="8" ry="4" fill="#FFE66D" opacity="0.8"/>
+                    <ellipse cx="55" cy="120" rx="8" ry="4" fill="#F38181" opacity="0.8"/>
+                    
+                    <!-- 끝 장식 -->
+                    <circle cx="50" cy="128" r="4" fill="#FFD93D"/>
+                    <circle cx="50" cy="128" r="2" fill="#FFF" opacity="0.6"/>
+                </svg>
+            </div>
+
+            <div class="decoration kite-right" aria-hidden="true">
+                <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 연 그림자 -->
+                    <polygon points="52,12 82,52 52,92 22,52" fill="#000000" opacity="0.1"/>
+                    
+                    <!-- 연 본체 -->
+                    <polygon points="50,10 80,50 50,90 20,50" fill="#6C5CE7"/>
+                    
+                    <!-- 연의 4개 섹션 -->
+                    <polygon points="50,10 80,50 50,50" fill="#FD79A8"/>
+                    <polygon points="50,50 80,50 50,90" fill="#FDCB6E"/>
+                    <polygon points="50,50 20,50 50,90" fill="#74B9FF"/>
+                    <polygon points="50,10 20,50 50,50" fill="#A29BFE"/>
+                    
+                    <!-- 중앙 십자 프레임 -->
+                    <line x1="50" y1="10" x2="50" y2="90" stroke="#8B4513" stroke-width="2"/>
+                    <line x1="20" y1="50" x2="80" y2="50" stroke="#8B4513" stroke-width="2"/>
+                    
+                    <!-- 전통 문양 (태극 모양) -->
+                    <circle cx="50" cy="50" r="12" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.7"/>
+                    <path d="M 50 38 Q 50 44 56 50 Q 50 56 50 62 Q 50 56 44 50 Q 50 44 50 38" fill="#FFD700" opacity="0.5"/>
+                    <circle cx="50" cy="44" r="3" fill="#FFF" opacity="0.6"/>
+                    <circle cx="50" cy="56" r="3" fill="#FFD700" opacity="0.6"/>
+                    
+                    <!-- 연 꼬리 -->
+                    <line x1="50" y1="90" x2="50" y2="125" stroke="#6C5CE7" stroke-width="2"/>
+                    
+                    <!-- 꼬리 리본들 -->
+                    <ellipse cx="45" cy="100" rx="8" ry="4" fill="#FD79A8" opacity="0.8"/>
+                    <ellipse cx="55" cy="100" rx="8" ry="4" fill="#FDCB6E" opacity="0.8"/>
+                    <ellipse cx="45" cy="110" rx="8" ry="4" fill="#74B9FF" opacity="0.8"/>
+                    <ellipse cx="55" cy="110" rx="8" ry="4" fill="#A29BFE" opacity="0.8"/>
+                    <ellipse cx="45" cy="120" rx="8" ry="4" fill="#FD79A8" opacity="0.8"/>
+                    <ellipse cx="55" cy="120" rx="8" ry="4" fill="#6C5CE7" opacity="0.8"/>
+                    
+                    <!-- 끝 장식 -->
+                    <circle cx="50" cy="128" r="4" fill="#FFD93D"/>
+                    <circle cx="50" cy="128" r="2" fill="#FFF" opacity="0.6"/>
+                </svg>
+            </div>
+
+            <!-- 헤더 섹션 -->
+            <header class="event-header">
+                <div class="event-year-image">
+                    <img src="year-2026.png" alt="2026" class="year-image">
+                </div>
+                <div class="event-subtitle">웅진마켓 패밀리데이</div>
+                <div class="event-logo">
+                    <img src="family-day-logo.png" alt="FAMILY DAY" class="logo-image">
+                </div>
+                <p class="event-period">26. 02. 03 ── 02. 05</p>
+            </header>
+
+            <!-- Benefits 섹션 -->
+            <section class="benefits-section" aria-label="이벤트 혜택">
+                <div class="benefits-container">
+                    <!-- Card 1 -->
+                    <article class="benefit-card">
+                        <h2 class="card-title">웅진마켓 회원</h2>
+                        <div class="card-content-box">
+                            <div class="card-icon">
+                                <img src="coin_icon_nobg.png" alt="웅진마켓 회원 혜택" style="width: 134px; height: 112px; object-fit: contain;">
+                            </div>
+                            <p class="card-benefit">적립금 2,000원</p>
+                            <p class="card-detail">(즉시사용)</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="benefit-card">
+                        <h2 class="card-title">구매금액</h2>
+                        <div class="card-content-box">
+                            <div class="card-icon">
+                                <img src="cash_icon_nobg.png" alt="구매금액 페이백" style="width: 134px; height: 112px; object-fit: contain;">
+                            </div>
+                            <p class="card-benefit">10% 페이백</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="benefit-card">
+                        <h2 class="card-title">비씨카드</h2>
+                        <div class="card-content-box">
+                            <div class="card-icon">
+                                <img src="card_icon_nobg.png" alt="비씨카드 할인" style="width: 134px; height: 112px; object-fit: contain;">
+                            </div>
+                            <p class="card-benefit">10% 할인</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

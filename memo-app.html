@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ My Colorful Memo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="header-emoji">✨</div>
+            <h1>My Colorful Memo</h1>
+            <div class="header-subtitle">오늘도 화이팅! 🌈</div>
+        </header>
+        
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="totalCount">0</div>
+                    <div class="stat-label">전체</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="completedCount">0</div>
+                    <div class="stat-label">완료</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="starredCount">0</div>
+                    <div class="stat-label">중요</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="emoji-picker">
+                <button class="emoji-btn" data-emoji="📝">📝</button>
+                <button class="emoji-btn" data-emoji="💡">💡</button>
+                <button class="emoji-btn" data-emoji="🎯">🎯</button>
+                <button class="emoji-btn" data-emoji="🔥">🔥</button>
+                <button class="emoji-btn" data-emoji="💪">💪</button>
+                <button class="emoji-btn" data-emoji="🎨">🎨</button>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="memoContent" placeholder="오늘 할 일을 적어보세요! ✍️">
+                <button id="addMemoBtn" class="btn-add">
+                    <span class="add-icon">+</span>
+                </button>
+            </div>
+            <div class="color-picker">
+                <button class="color-btn" data-color="#ff6b9d" style="background: #ff6b9d;"></button>
+                <button class="color-btn" data-color="#c44569" style="background: #c44569;"></button>
+                <button class="color-btn" data-color="#ffa502" style="background: #ffa502;"></button>
+                <button class="color-btn" data-color="#ffd32a" style="background: #ffd32a;"></button>
+                <button class="color-btn" data-color="#05c46b" style="background: #05c46b;"></button>
+                <button class="color-btn" data-color="#0fbcf9" style="background: #0fbcf9;"></button>
+                <button class="color-btn active" data-color="#7c7cff" style="background: #7c7cff;"></button>
+                <button class="color-btn" data-color="#a55eea" style="background: #a55eea;"></button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">전체 보기</button>
+            <button class="filter-btn" data-filter="active">진행중</button>
+            <button class="filter-btn" data-filter="completed">완료됨</button>
+            <button class="filter-btn" data-filter="starred">중요 ⭐</button>
+        </div>
+
+        <div id="memoList" class="todo-list"></div>
+        
+        <button id="clearAllBtn" class="btn-clear-all">
+            <span>🗑️</span> 전체 삭제
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
