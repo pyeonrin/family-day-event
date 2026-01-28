@@ -1,0 +1,755 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="보드게임 신작대전 - 신작보드게임 포함 3만원 이상 구매 시 네이버페이 10%페이백">
+    <title>보드게임 신작대전</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SUIT', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 775px;
+            background: #FDD302;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* 동전 애니메이션 */
+        .coin {
+            position: fixed;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .coin img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .coin-1 {
+            top: 50%;
+            left: 50%;
+            animation: coinBurst 1.5s ease-out forwards;
+        }
+
+        .coin-2 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 2s ease-in forwards;
+            animation-delay: 0.1s;
+        }
+
+        .coin-3 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 2.1s ease-in forwards;
+            animation-delay: 0.15s;
+        }
+
+        .coin-4 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 1.9s ease-in forwards;
+            animation-delay: 0.2s;
+        }
+
+        .coin-5 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 2.05s ease-in forwards;
+            animation-delay: 0.25s;
+        }
+
+        .coin-6 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 1.95s ease-in forwards;
+            animation-delay: 0.3s;
+        }
+
+        .coin-7 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 2.15s ease-in forwards;
+            animation-delay: 0.35s;
+        }
+
+        .coin-8 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 2s ease-in forwards;
+            animation-delay: 0.4s;
+        }
+
+        .coin-9 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 1.85s ease-in forwards;
+            animation-delay: 0.45s;
+        }
+
+        .coin-10 {
+            top: 50%;
+            left: 50%;
+            animation: coinArc 2.1s ease-in forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes coinFall {
+            0% {
+                top: -120px;
+                left: var(--start-left);
+                opacity: 1;
+                transform: rotateZ(0deg);
+            }
+            50% {
+                left: calc(var(--start-left) + var(--sway, 30px));
+            }
+            100% {
+                top: 100vh;
+                left: var(--start-left);
+                opacity: 0;
+                transform: rotateZ(720deg);
+            }
+        }
+
+        @keyframes coinBurst {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            15% {
+                transform: translate(-50%, -50%) scale(1.3) rotate(0deg);
+                opacity: 1;
+            }
+            20% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes coinArc {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            10% {
+                top: 50%;
+                left: 50%;
+                transform: translate(calc(-50% + var(--x, 0px) * 0.2), calc(-50% + var(--y, 0px) * 0.2)) scale(1) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                left: 50%;
+                transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, 0px))) scale(1) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* 각 동전의 방향 - 자연스러운 분산 */
+        .coin-2 { --x: 400px; --y: -500px; }
+        .coin-3 { --x: -400px; --y: -500px; }
+        .coin-4 { --x: 500px; --y: -450px; }
+        .coin-5 { --x: -500px; --y: -450px; }
+        .coin-6 { --x: 350px; --y: -550px; }
+        .coin-7 { --x: -350px; --y: -550px; }
+        .coin-8 { --x: 450px; --y: -480px; }
+        .coin-9 { --x: -450px; --y: -480px; }
+        .coin-10 { --x: 200px; --y: -520px; }
+
+        /* 헤더 섹션 */
+        .header {
+            text-align: center;
+            padding: 120px 30px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title-image {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            display: block;
+            margin: 0 auto 25px;
+            aspect-ratio: 600 / 200;
+            object-fit: contain;
+            transform: scale(1.3);
+            transform-origin: center;
+        }
+
+        .description {
+            font-size: 29px;
+            color: #161734;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            margin-top: -20px;
+            font-weight: 400;
+            font-family: 'Ria Sans', sans-serif;
+        }
+
+        .date-info {
+            font-size: 20px;
+            color: #161734;
+            font-weight: 400;
+            margin-top: 10px;
+            font-family: 'Ria Sans', sans-serif;
+        }
+
+        /* 보드판 섹션 */
+        .board-section {
+            position: relative;
+            z-index: 2;
+            margin: -70px 0 30px 0;
+            border-radius: 0;
+            overflow: visible;
+            width: 100%;
+        }
+
+        .board-games-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .board-section .promo-card {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            margin: 0;
+            width: 400px;
+            height: 200px;
+            padding: 0;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+            box-shadow: none;
+        }
+            box-shadow: none;
+        }
+
+        /* 데코 요소 */
+        .deco-element {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .deco-chess-left {
+            width: 150px;
+            height: 150px;
+            left: 100px;
+            top: 150px;
+            z-index: 4;
+        }
+
+        .deco-chess-right {
+            width: 150px;
+            height: 150px;
+            right: 80px;
+            top: 150px;
+            z-index: 4;
+        }
+
+        .deco-rock-left {
+            width: 120px;
+            height: 120px;
+            left: 80px;
+            bottom: -60px;
+            z-index: 6;
+        }
+
+        .deco-rock-right {
+            width: 120px;
+            height: 120px;
+            right: 60px;
+            bottom: -80px;
+            z-index: 6;
+        }
+
+        .deco-element img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) {
+            .board-section {
+                margin: -50px 0 30px 0;
+                border-radius: 0;
+            }
+
+            .board-games-image {
+                border-radius: 0;
+            }
+
+            .deco-chess-left,
+            .deco-chess-right,
+            .deco-rock-left,
+            .deco-rock-right {
+                display: none;
+            }
+
+            .description {
+                font-size: 24px;
+            }
+
+            .date-info {
+                font-size: 16px;
+            }
+        }
+
+        /* 프로모션 카드 */
+        .promo-card {
+            background: url('naverpay.png') center/cover no-repeat;
+            border-radius: 24px;
+            padding: 30px;
+            margin: 30px 20px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .promo-label {
+            font-size: 26px;
+            color: #00AA0B;
+            margin-bottom: 4px;
+            font-weight: 500;
+            font-family: 'SUIT', sans-serif;
+            position: absolute;
+            top: 30px;
+            right: 50px;
+        }
+
+        .promo-method {
+            font-size: 16px;
+            color: #00AA0B;
+            margin-bottom: 16px;
+            font-weight: 700;
+            font-family: 'SUIT', sans-serif;
+        }
+
+        .promo-amount {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: nowrap;
+            position: absolute;
+            top: 60%;
+            right: 30px;
+            transform: translateY(-50%);
+        }
+
+        .amount-label {
+            font-size: 14px;
+            color: #00AA0B;
+            font-weight: 600;
+            font-family: 'SUIT', sans-serif;
+            white-space: nowrap;
+        }
+
+        .amount-value {
+            font-size: 72px;
+            font-weight: 900;
+            color: #00AA0B;
+            font-family: 'SUIT', sans-serif;
+            line-height: 0.9;
+            margin: 0 2.5px 0 0;
+        }
+
+        .amount-unit {
+            font-size: 24px;
+            color: #00AA0B;
+            font-weight: 700;
+            font-family: 'Sandoll GyeokdongG2 TTF', sans-serif;
+            white-space: nowrap;
+            align-self: flex-end;
+            margin-bottom: 8px;
+            margin-left: 2.5px;
+        }
+
+        .promo-note {
+            font-size: 11px;
+            color: #FFFFFF;
+            margin-top: 0;
+            line-height: 1.3;
+            font-weight: 400;
+            font-family: 'SUIT', sans-serif;
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+            text-align: right;
+            max-width: 150px;
+        }
+
+        /* 유의사항 섹션 */
+        .notice-section {
+            background: #FFFFFF;
+            padding: 48px;
+            margin: 30px 20px 40px;
+            border-radius: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .notice-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #444444;
+            margin-bottom: 24px;
+            font-family: 'SUIT', sans-serif;
+        }
+
+        .notice-content {
+            font-size: 22px;
+            color: #444444;
+            line-height: 1.8;
+        }
+
+        .notice-item {
+            margin-bottom: 16px;
+            padding-left: 20px;
+            position: relative;
+            font-family: 'SUIT', sans-serif;
+            font-weight: 500;
+        }
+
+        .notice-item:before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: #444444;
+            font-size: 8px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .board-section {
+                margin: -50px 0 30px 0;
+                border-radius: 0;
+            }
+
+            .board-games-image {
+                border-radius: 0;
+            }
+
+            .board-section .promo-card {
+                width: 240px;
+                height: 150px;
+            }
+
+            .description {
+                font-size: 22px;
+            }
+
+            .date-info {
+                font-size: 16px;
+            }
+
+            .promo-label {
+                font-size: 11px;
+                top: 15px;
+                right: 20px;
+            }
+
+            .promo-amount {
+                right: 20px;
+            }
+
+            .amount-value {
+                font-size: 54px;
+            }
+
+            .amount-unit {
+                font-size: 18px;
+            }
+
+            .promo-note {
+                font-size: 9px;
+                right: 20px;
+                bottom: 10px;
+                max-width: 120px;
+            }
+
+            .notice-section {
+                padding: 30px 20px;
+            }
+
+            .notice-title {
+                font-size: 18px;
+            }
+
+            .notice-content {
+                font-size: 14px;
+            }
+
+            .notice-item {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+                display: block;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .header {
+                padding: 80px 30px 30px;
+                text-align: center;
+            }
+
+            .board-section {
+                margin: -70px 0 30px 0;
+                border-radius: 0;
+                width: 100%;
+            }
+
+            .board-games-image {
+                border-radius: 0;
+                width: 100%;
+            }
+
+            .title-image {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                margin: 0 auto 15px;
+                aspect-ratio: 600 / 200;
+            }
+
+            .description {
+                font-size: 14px;
+                margin-bottom: 6px;
+                line-height: 1.4;
+                margin-top: -10px;
+            }
+
+            .date-info {
+                font-size: 14px;
+                margin-top: 10px;
+            }
+
+            .promo-card {
+                margin: 20px auto;
+                padding: 20px;
+                max-width: calc(100% - 40px);
+            }
+
+            .promo-amount {
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .amount-value {
+                font-size: 64px;
+            }
+
+            .amount-unit {
+                font-size: 20px;
+            }
+
+            .promo-label {
+                font-size: 14px;
+            }
+
+            .promo-method {
+                font-size: 16px;
+            }
+
+            .promo-note {
+                font-size: 14px;
+            }
+
+            .notice-section {
+                margin: 20px auto 30px;
+                padding: 20px;
+                max-width: calc(100% - 40px);
+            }
+
+            .notice-title {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+
+            .notice-content {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
+            .notice-item {
+                font-size: 12px;
+                margin-bottom: 10px;
+                padding-left: 16px;
+            }
+
+            .coin {
+                width: 240px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 장식 동전 -->
+        <div class="coin coin-1">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-2">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-3">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-4">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-5">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-6">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-7">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-8">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-9">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+        <div class="coin coin-10">
+            <img src="naver_coin.png" alt="네이버 코인">
+        </div>
+
+        <!-- 헤더 -->
+        <div class="header">
+            <img src="Title.png" alt="보드게임 신작대전" class="title-image">
+            <p class="description">신작보드게임 포함 3만원 이상 구매 시</p>
+            <p class="description">네이버페이 10%페이백</p>
+            <p class="date-info">행사기간 1.28~2.22</p>
+        </div>
+
+        <!-- 보드판 섹션 -->
+        <div class="board-section">
+            <img src="board_games_section.png" alt="보드게임 신작대전" class="board-games-image">
+            <!-- 프로모션 카드 -->
+            <div class="promo-card">
+                <div class="promo-label">네이버페이 포인트</div>
+                <div class="promo-amount">
+                    <div class="amount-value">3,000</div>
+                    <div class="amount-unit">원</div>
+                </div>
+                <div class="promo-note">* 페이백 한도금액은 최대 3,000원 입니다.</div>
+            </div>
+        </div>
+
+        <!-- 유의사항 -->
+        <div class="notice-section">
+            <h3 class="notice-title">유의사항</h3>
+            <div class="notice-content">
+                <div class="notice-item">본 이벤트는 웅진마켓 회원 대상 이벤트 입니다.(비회원 제외)</div>
+                <div class="notice-item">페이백 이벤트는 해당 기획전에 등록된 상품을 3만원 이상 구매 시 적용됩니다.</div>
+                <div class="notice-item">페이백 이벤트는 3월8일까지 구매확정된 주문건에 대해서만 네이버페이 포인트 모바일 쿠폰이 발송됩니다.</div>
+                <div class="notice-item">페이백 이벤트의 모바일 쿠폰은 구매한 회원 기준으로 발송됩니다. (주문자 휴대번호로 발송예정이며, 26년 3월2주~3주차 발송예정이니 회원정보 수정이 필요한 경우 미리 변경부탁드립니다.(재발송불가))</div>
+                <div class="notice-item">구매금액은 주문 1건 기준으로 적립금, 포인트, 마일리지는 포함되지 않습니다. (실 결제금액 기준)</div>
+                <div class="notice-item">본 이벤트는 당사 사정에 의하여 사전 고지 없이 변경 및 종료될 수 있습니다.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameBoxes = document.querySelectorAll('.game-box');
+            gameBoxes.forEach((box, index) => {
+                box.style.animation = `fadeInUp 0.6s ease-out ${index * 0.15}s both`;
+            });
+        });
+
+        // 페이드인 애니메이션 추가
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
